@@ -1,10 +1,10 @@
 {
     "theme_color": "#4a90e2",
     "background_color": "#4a90e2",
-    "display": "minimal-ui",
+    "display": "fullscreen",
     "scope": "https://zonaro.github.io/cacheCalc/",
     "start_url": "https://zonaro.github.io/cacheCalc/",
-    "name": "Calculadora de Cache BeatFellas",
+    "name": "Calculadora de Cachê BeatFellas",
     "short_name": "CacheCalc",
     "description": "Calcula o Cache de Shows",
     "icons": [
