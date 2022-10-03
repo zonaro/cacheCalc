@@ -12,13 +12,13 @@ Array.prototype.uniqueMerge = function (a) {
 function getPercent(total, percent) {
     total = total || 0;
     percent = percent || 100;
-    return percent * total / 100;
+    return parseFloat(percent) * parseFloat(total) / 100.00;
 }
 
 function calcularFatia(array, percent, total) {
     let totalADividir = getPercent(total, percent);
     let fatia = array.map(function (p) {
-        return { nome: p, valor: (totalADividir / array.length) };
+        return { nome: p, valor: (totalADividir / parseFloat(array.length)) };
     });
     return fatia
 }
@@ -48,7 +48,7 @@ function calcularCache(total, arrayProducao, arrayComercial, arrayArtista,arrayP
 
     });
 
-    separado.totais.push({ nome: "BeatFellas", valor: getPercent(total, porcentagemBeatfellas) });
+    separado.totais.push({ nome: "BeatFellas", valor: getPercent(total, porcentagemBeatfellas).toFixed(2) });
 
     return separado;
 }
