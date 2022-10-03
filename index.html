@@ -85,14 +85,14 @@
 
             e.preventDefault();
 
-            let cache = parseFolat($("#cacheTotal").val());
-            let beatfellas = parseFolat($("#porcentagemBeatfellas").val());
             let prods = $("#producao").val();
             let arts = $("#artista").val();
             let com = $("#comercial").val();
-            let por_art = parseFolat($("#porcentagemArtista").val());
-            let por_prod = parseFolat($("#porcentagemProducao").val());
-            let por_com = parseFolat($("#porcentagemComercial").val());
+            let cache = parseFloat($("#cacheTotal").val());
+            let beatfellas = parseFloat($("#porcentagemBeatfellas").val());
+            let por_art = parseFloat($("#porcentagemArtista").val());
+            let por_prod = parseFloat($("#porcentagemProducao").val());
+            let por_com = parseFloat($("#porcentagemComercial").val());
 
 
             var tt = calcularCache(cache, prods, com, art, beatfellas, por_prod, por_com, por_art);
