@@ -15,6 +15,11 @@
 <body class="container">
     <form class="row">
         <div class="col-12">
+            <label for="porcentagemBeatfellas">Cachê Total</label>
+
+            <input class="form-control" type="number" name="cacheTotal" id="cacheTotal" />
+        </div>
+        <div class="col-12">
             <label for="porcentagemBeatfellas">Porcentagem BeatFellas</label>
 
             <input class="form-control" type="number" min="1" max="100" name="porcentagemBeatfellas"
@@ -80,6 +85,7 @@
 
             e.preventDefault();
 
+            let cache = parseFolat($("#cacheTotal").val());
             let beatfellas = parseFolat($("#porcentagemBeatfellas").val());
             let prods = $("#producao").val();
             let arts = $("#artista").val();
@@ -89,7 +95,7 @@
             let por_com = parseFolat($("#porcentagemComercial").val());
 
 
-            var tt = calcularCache(prods, com, art, beatfellas, por_prod, por_com, por_art);
+            var tt = calcularCache(cache, prods, com, art, beatfellas, por_prod, por_com, por_art);
 
             console.log("Calculado", tt);
 

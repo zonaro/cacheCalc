@@ -22,7 +22,7 @@ function calcularFatia(array, percent, total) {
     });
 }
 
-function calcularCache(arrayProducao, arrayComercial, arrayArtista, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista) {
+function calcularCache(total,arrayProducao, arrayComercial, arrayArtista, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista) {
     let separado = {
         beatfellas: getPercent(total, porcentagemBeatfellas),
         producao: calcularFatia(arrayProducao, porcentagemProducao, total),
