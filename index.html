@@ -1,43 +1,63 @@
 <head>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="cacheCalc.js"></script>
 </head>
 
 <body>
-    <form>
-        <label for="comercial">Comercial</label>
-        <select multiple name="comercial" id="comercial">
-            <option value="Caxa">Caxa</option>
-            <option value="Kaizonaro">Kaizonaro</option>
-            <option value="Mautari" selected>Mautari</option>
-        </select>
-        <input type="number" min="1" max="100" name="porcentagemComercial" id="porcentagemComercial" />
+    <form class="row">
+        <div class="col-12">
 
-        <label for="producao">Produção</label>
-        <select multiple name="producao" id="producao">
-            <option value="Gustavo">Gustavo</option>
-            <option value="Igor">Igor</option>
-            <option value="Tucca">Tucca</option>
-            <option value="Sara">Sara</option>
+            <label for="comercial">Comercial</label>
+            <select multiple name="comercial" id="comercial">
+                <option value="Caxa">Caxa</option>
+                <option value="Kaizonaro">Kaizonaro</option>
+                <option value="Mautari" selected>Mautari</option>
+            </select>
+            <label for="porcentagemComercial">Porcentagem</label>
 
-        </select>
-        <input type="number" min="1" max="100" name="porcentagemProducao" id="porcentagemProducao" />
+            <input class="form-control" type="number" min="1" max="100" name="porcentagemComercial"
+                id="porcentagemComercial" />
+        </div>
+        <div class="col-12">
 
+            <label for="producao">Produção</label>
+            <select multiple name="producao" id="producao">
+                <option value="Gustavo">Gustavo</option>
+                <option value="Igor">Igor</option>
+                <option value="Tucca">Tucca</option>
+                <option value="Sara">Sara</option>
 
-        <label for="artista">Artista</label>
-        <select multiple name="artista" id="artista">
-            <option value="Caxa" selected>Caxa</option>
-            <option value="Kaizonaro" selected>Kaizonaro</option>
-            <option value="Mautari" selected>Mautari</option>
-        </select>
-        <input type="number" min="1" max="100" name="porcentagemArtista" id="porcentagemArtista" />
+            </select>
+            <label for="porcentagemProducao">Porcentagem</label>
+            <input class="form-control" type="number" min="1" max="100" name="porcentagemProducao"
+                id="porcentagemProducao" />
+        </div>
 
-        <input type="submit" value="Calcular">
+        <div class="col-12">
+
+            <label for="artista">Artista</label>
+            <select multiple name="artista" id="artista">
+                <option value="Caxa" selected>Caxa</option>
+                <option value="Kaizonaro" selected>Kaizonaro</option>
+                <option value="Mautari" selected>Mautari</option>
+            </select>
+            <label for="porcentagemArtista">Porcentagem</label>
+            <input class="form-control" type="number" min="1" max="100" name="porcentagemArtista"
+                id="porcentagemArtista" />
+
+        </div>
+        <div class="col-12">
+            <input class="btn btn-success" type="submit" value="Calcular">
+        </div>
     </form>
     <script>
 
@@ -50,7 +70,7 @@
         });
 
         $("form").submit(function (e) {
-            
+
             e.preventDefault();
 
             let beatfellas = 10;
