@@ -15,6 +15,12 @@
 <body class="container">
     <form class="row">
         <div class="col-12">
+            <label for="porcentagemBeatfellas">Porcentagem BeatFellas</label>
+
+            <input class="form-control" type="number" min="1" max="100" name="porcentagemBeatfellas"
+                id="porcentagemBeatfellas" />
+        </div>
+        <div class="col-12">
 
             <label for="comercial">Comercial</label>
             <select class="form-control" multiple name="comercial" id="comercial">
@@ -30,7 +36,7 @@
         <div class="col-12">
 
             <label for="producao">Produção</label>
-            <select class="form-control"  multiple name="producao" id="producao">
+            <select class="form-control" multiple name="producao" id="producao">
                 <option value="Gustavo" selected>Gustavo</option>
                 <option value="Igor">Igor</option>
                 <option value="Tucca">Tucca</option>
@@ -54,6 +60,7 @@
             <input class="form-control" type="number" min="1" max="100" name="porcentagemArtista"
                 id="porcentagemArtista" />
 
+
         </div>
         <div class="col-12">
             <input class="btn btn-success" type="submit" value="Calcular">
@@ -73,7 +80,7 @@
 
             e.preventDefault();
 
-            let beatfellas = 10;
+            let beatfellas = parseFolat($("#porcentagemBeatfellas").val());
             let prods = $("#producao").val().split(",");
             let arts = $("#artista").val().split(",");
             let com = $("#comercial").val().split(",");
