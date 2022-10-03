@@ -24,7 +24,7 @@ function calcularFatia(array, percent, total) {
 }
 
 function calcularCache(total, arrayProducao, arrayComercial, arrayArtista, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista) {
-    let separado = {     
+    let separado = {
         producao: calcularFatia(arrayProducao, porcentagemProducao, total),
         comercial: calcularFatia(arrayComercial, porcentagemComercial, total),
         artista: calcularFatia(arrayArtista, porcentagemArtista, total)

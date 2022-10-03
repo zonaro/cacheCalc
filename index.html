@@ -75,10 +75,7 @@
 
 
         </div>
-        <div class="col-12">
-            <br>
-            <input class="btn btn-success" type="submit" value="Calcular Valores">
-        </div>
+
     </form>
     <table class="table">
         <thead>
@@ -116,16 +113,19 @@
             let por_prod = parseFloat($("#porcentagemProducao").val());
             let por_com = parseFloat($("#porcentagemComercial").val());
 
-
-            var tt = calcularCache(cache, prods, com, arts, beatfellas, por_prod, por_com, por_art);
-
-            console.log("Calculado", tt);
-
             $("#result").html("");
 
-            tt.totais.forEach(element => {
-                $("#result").append("<tr><td>" + element.nome + "</td><td>R$" + element.valor + "</td></tr>");
-            });
+            if ((por_art + por_prod + por_com) == 100) {
+
+                var tt = calcularCache(cache, prods, com, arts, beatfellas, por_prod, por_com, por_art);
+
+                console.log("Calculado", tt);
+
+
+                tt.totais.forEach(element => {
+                    $("#result").append("<tr><td>" + element.nome + "</td><td>R$" + element.valor + "</td></tr>");
+                });
+            }
 
         });
 
