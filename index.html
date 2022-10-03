@@ -48,7 +48,8 @@
         </div>
         <div class="col-12">
 
-            <label for="produtores">Produtores (Quem resolve problemas e pendências diretamente com o contratante)</label>
+            <label for="produtores">Produtores (Quem resolve problemas e pendências diretamente com o
+                contratante)</label>
             <select class="form-control" multiple name="produtores" id="produtores">
                 <option value="Caxa">Caxa</option>
                 <option value="Kaizonaro">Kaizonaro</option>
@@ -90,7 +91,7 @@
 
 
         </div>
-<hr>
+        <hr>
     </form>
     <table class="table">
         <thead>
@@ -131,8 +132,8 @@
             let por_pd = parseFloat($("#porcentagemProdutores").val());
 
             $("#result").html("");
-
-            if ((por_art + por_prod + por_com + por_pd) == 100) {
+            let sum_por = (beatfellas + por_art + por_prod + por_com + por_pd)
+            if (sum_por == 100) {
 
                 var tt = calcularCache(cache, prods, com, arts, pd, beatfellas, por_prod, por_com, por_art, por_pd);
 
@@ -142,6 +143,8 @@
                 tt.totais.forEach(element => {
                     $("#result").append("<tr><td>" + element.nome + "</td><td>R$" + element.valor + "</td></tr>");
                 });
+            } else {
+                console.warn("Porcentagens mau distribuidas", sum_por)
             }
 
         });
