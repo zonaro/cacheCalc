@@ -30,12 +30,12 @@
         <div class="col-12">
             <label for="porcentagemBeatfellas">Porcentagem da BeatFellas</label>
 
-            <input class="form-control" type="number" min="1" max="100" name="porcentagemBeatfellas"
+            <input class="form-control" type="number" min="1" max="100" value="10" name="porcentagemBeatfellas"
                 id="porcentagemBeatfellas" />
         </div>
         <div class="col-12">
 
-            <label for="comercial">Participantes do Comercial (Quem fechou o show)</label>
+            <label for="comercial">Comercial (Quem fechou o show)</label>
             <select class="form-control" multiple name="comercial" id="comercial">
                 <option value="Caxa">Caxa</option>
                 <option value="Kaizonaro">Kaizonaro</option>
@@ -43,17 +43,32 @@
             </select>
             <label for="porcentagemComercial">Porcentagem</label>
 
-            <input class="form-control" type="number" min="1" max="100" name="porcentagemComercial"
+            <input class="form-control" type="number" min="1" max="100" value="20" name="porcentagemComercial"
                 id="porcentagemComercial" />
         </div>
         <div class="col-12">
 
-            <label for="producao">Participantes da Produção (Quem ajudou na técnica de filmagem, som etc)</label>
+            <label for="produtores">Produtores (Quem resolve diretamente com o contratante)</label>
+            <select class="form-control" multiple name="produtores" id="produtores">
+                <option value="Caxa">Caxa</option>
+                <option value="Kaizonaro">Kaizonaro</option>
+                <option value="Mautari" selected>Mautari</option>
+            </select>
+            <label for="porcentagemProdutores">Porcentagem</label>
+
+            <input class="form-control" type="number" min="1" max="100" value="20" name="porcentagemProdutores"
+                id="porcentagemProdutores" />
+        </div>
+        <div class="col-12">
+
+            <label for="producao"> Produção (Quem ajudou na técnica de filmagem, som etc)</label>
             <select class="form-control" multiple name="producao" id="producao">
                 <option value="Gustavo" selected>Gustavo</option>
                 <option value="Igor">Igor</option>
                 <option value="Tucca">Tucca</option>
                 <option value="Sara">Sara</option>
+                <option value="Sara Rios">Sara Rios</option>
+                <option value="Luis">Luis</option>
 
             </select>
             <label for="porcentagemProducao">Porcentagem</label>
@@ -107,17 +122,19 @@
             let prods = $("#producao").val();
             let arts = $("#artista").val();
             let com = $("#comercial").val();
+            let pd = $("#produtores").val();
             let cache = parseFloat($("#cacheTotal").val());
             let beatfellas = parseFloat($("#porcentagemBeatfellas").val());
             let por_art = parseFloat($("#porcentagemArtista").val());
             let por_prod = parseFloat($("#porcentagemProducao").val());
             let por_com = parseFloat($("#porcentagemComercial").val());
+            let por_pd = parseFloat($("#porcentagemProdutores").val());
 
             $("#result").html("");
 
             if ((por_art + por_prod + por_com) == 100) {
 
-                var tt = calcularCache(cache, prods, com, arts, beatfellas, por_prod, por_com, por_art);
+                var tt = calcularCache(cache, prods, com, arts, pd, beatfellas, por_prod, por_com, por_art, por_pd);
 
                 console.log("Calculado", tt);
 

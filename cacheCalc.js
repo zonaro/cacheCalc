@@ -23,11 +23,12 @@ function calcularFatia(array, percent, total) {
     return fatia
 }
 
-function calcularCache(total, arrayProducao, arrayComercial, arrayArtista, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista) {
+function calcularCache(total, arrayProducao, arrayComercial, arrayArtista,arrayProdutor, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista,porcentagemProdutor) {
     let separado = {
         producao: calcularFatia(arrayProducao, porcentagemProducao, total),
         comercial: calcularFatia(arrayComercial, porcentagemComercial, total),
-        artista: calcularFatia(arrayArtista, porcentagemArtista, total)
+        artista: calcularFatia(arrayArtista, porcentagemArtista, total),
+        produtor: calcularFatia(arrayProdutor, porcentagemProdutor, total)
     }
 
     let everyone = arrayProducao.uniqueMerge(arrayComercial).uniqueMerge(arrayArtista);
@@ -42,7 +43,7 @@ function calcularCache(total, arrayProducao, arrayComercial, arrayArtista, porce
         let redutor = function (a, b) { return a + b; }
         return {
             nome: pessoa,
-            valor: separado.producao.map(totalizador).reduce(redutor, 0) + separado.comercial.map(totalizador).reduce(redutor, 0) + separado.artista.map(totalizador).reduce(redutor, 0)
+            valor: separado.producao.map(totalizador).reduce(redutor, 0) + separado.comercial.map(totalizador).reduce(redutor, 0) + separado.artista.map(totalizador).reduce(redutor, 0) + separado.produtor.map(totalizador).reduce(redutor, 0)
         }
 
     });
