@@ -17,14 +17,14 @@ function getPercent(total, percent) {
 
 function calcularFatia(array, percent, total) {
     let totalADividir = getPercent(total, percent);
-    return array.map(function (p) {
+    let fatia = array.map(function (p) {
         return { nome: p, valor: (totalADividir / array.length).toFixed(2) };
     });
+    return fatia
 }
 
-function calcularCache(total,arrayProducao, arrayComercial, arrayArtista, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista) {
-    let separado = {
-        beatfellas: getPercent(total, porcentagemBeatfellas),
+function calcularCache(total, arrayProducao, arrayComercial, arrayArtista, porcentagemBeatfellas, porcentagemProducao, porcentagemComercial, porcentagemArtista) {
+    let separado = {     
         producao: calcularFatia(arrayProducao, porcentagemProducao, total),
         comercial: calcularFatia(arrayComercial, porcentagemComercial, total),
         artista: calcularFatia(arrayArtista, porcentagemArtista, total)
@@ -33,18 +33,21 @@ function calcularCache(total,arrayProducao, arrayComercial, arrayArtista, porcen
     let everyone = arrayProducao.uniqueMerge(arrayComercial).uniqueMerge(arrayArtista);
 
     separado.totais = everyone.map(function (pessoa) {
+        let totalizador = function (element) {
+            if (element.nome.toLowerCase() == pessoa.toLowerCase()) {
+                return parseFloat(element.valor);
+            }
+            return 0.0;
+        }
+        let redutor = function (a, b) { return a + b; }
         return {
             nome: pessoa,
-            valor: separado.producao.array.forEach(element => {
-                if (element.nome.toLowerCase() == pessoa.toLowerCase()) {
-                    return element.valor;
-                } else {
-                    return 0;
-                }
-            }).reduce(function (a, b) { return a + b; }, 0)
+            valor: separado.producao.map(totalizador).reduce(redutor, 0) + separado.comercial.map(totalizador).reduce(redutor, 0) + separado.artista.map(totalizador).reduce(redutor, 0)
         }
 
     });
+
+    separado.totais.push({ nome: "BeatFellas", valor: getPercent(total, porcentagemBeatfellas) });
 
     return separado;
 }
