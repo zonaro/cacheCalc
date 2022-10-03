@@ -13,21 +13,22 @@
 </head>
 
 <body class="container">
+    <h1>Calculadora de Cachê BeatFellas</h1>
     <form class="row">
         <div class="col-12">
-            <label for="porcentagemBeatfellas">Cachê Total</label>
+            <label for="porcentagemBeatfellas">Cachê Bruto</label>
 
             <input class="form-control" type="number" name="cacheTotal" id="cacheTotal" />
         </div>
         <div class="col-12">
-            <label for="porcentagemBeatfellas">Porcentagem BeatFellas</label>
+            <label for="porcentagemBeatfellas">Porcentagem da BeatFellas</label>
 
             <input class="form-control" type="number" min="1" max="100" name="porcentagemBeatfellas"
                 id="porcentagemBeatfellas" />
         </div>
         <div class="col-12">
 
-            <label for="comercial">Comercial</label>
+            <label for="comercial">Participantes do Comercial (Quem fechou o show)</label>
             <select class="form-control" multiple name="comercial" id="comercial">
                 <option value="Caxa">Caxa</option>
                 <option value="Kaizonaro">Kaizonaro</option>
@@ -40,7 +41,7 @@
         </div>
         <div class="col-12">
 
-            <label for="producao">Produção</label>
+            <label for="producao">Participantes da Produção (Quem ajudou na técnica de filmagem, som etc)</label>
             <select class="form-control" multiple name="producao" id="producao">
                 <option value="Gustavo" selected>Gustavo</option>
                 <option value="Igor">Igor</option>
@@ -55,7 +56,7 @@
 
         <div class="col-12">
 
-            <label for="artista">Artista</label>
+            <label for="artista">Artista (Quem efetivamente tocou)</label>
             <select class="form-control" multiple name="artista" id="artista">
                 <option value="Caxa" selected>Caxa</option>
                 <option value="Kaizonaro" selected>Kaizonaro</option>
@@ -71,6 +72,19 @@
             <input class="btn btn-success" type="submit" value="Calcular">
         </div>
     </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>Valor a Receber (R$)</th>
+            </tr>
+        </thead>
+        <tbody id="result">
+
+        </tbody>
+    </table>
     <script>
 
         $(document).ready(function () {
@@ -99,6 +113,16 @@
 
             console.log("Calculado", tt);
 
+            $("#result").html("");
+
+            tt.totais.forEach(element => {
+                $("#result").append("<tr><td>" + element.nome + "</td><td>R$" + element.valor + "</td></tr>");
+            });
+
+        });
+
+        $(":input").on('change',function(){
+            $('form').submit();
         })
 
 
