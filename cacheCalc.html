@@ -1,0 +1,73 @@
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="cacheCalc.js"></script>
+</head>
+
+<body>
+    <form>
+        <label for="comercial">Comercial</label>
+        <select multiple name="comercial" id="comercial">
+            <option value="Caxa">Caxa</option>
+            <option value="Kaizonaro">Kaizonaro</option>
+            <option value="Mautari" selected>Mautari</option>
+        </select>
+        <input type="number" min="1" max="100" name="porcentagemComercial" id="porcentagemComercial" />
+
+        <label for="producao">Produção</label>
+        <select multiple name="producao" id="producao">
+            <option value="Gustavo">Gustavo</option>
+            <option value="Igor">Igor</option>
+            <option value="Tucca">Tucca</option>
+            <option value="Sara">Sara</option>
+
+        </select>
+        <input type="number" min="1" max="100" name="porcentagemProducao" id="porcentagemProducao" />
+
+
+        <label for="artista">Artista</label>
+        <select multiple name="artista" id="artista">
+            <option value="Caxa" selected>Caxa</option>
+            <option value="Kaizonaro" selected>Kaizonaro</option>
+            <option value="Mautari" selected>Mautari</option>
+        </select>
+        <input type="number" min="1" max="100" name="porcentagemArtista" id="porcentagemArtista" />
+
+        <input type="submit" value="Calcular">
+    </form>
+    <script>
+
+        $(document).ready(function () {
+
+        });
+
+        $("select").select2({
+            tags: true
+        });
+
+        $("form").submit(function (e) {
+            
+            e.preventDefault();
+
+            let beatfellas = 10;
+            let prods = $("#producao").val().split(",");
+            let arts = $("#artista").val().split(",");
+            let com = $("#comercial").val().split(",");
+            let por_art = parseFolat($("#porcentagemArtista").val());
+            let por_prod = parseFolat($("#porcentagemProducao").val());
+            let por_com = parseFolat($("#porcentagemComercial").val());
+
+
+            var tt = calcularCache(prods, com, art, beatfellas, por_prod, por_com, por_art);
+
+            console.log("Calculado", tt);
+
+        })
+
+
+    </script>
+</body>
