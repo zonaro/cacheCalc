@@ -18,7 +18,7 @@ function getPercent(total, percent) {
 function calcularFatia(array, percent, total) {
     let totalADividir = getPercent(total, percent);
     let fatia = array.map(function (p) {
-        return { nome: p, valor: (totalADividir / array.length).toFixed(2) };
+        return { nome: p, valor: (totalADividir / array.length) };
     });
     return fatia
 }
@@ -43,7 +43,7 @@ function calcularCache(total, arrayProducao, arrayComercial, arrayArtista,arrayP
         let redutor = function (a, b) { return a + b; }
         return {
             nome: pessoa,
-            valor: separado.producao.map(totalizador).reduce(redutor, 0) + separado.comercial.map(totalizador).reduce(redutor, 0) + separado.artista.map(totalizador).reduce(redutor, 0) + separado.produtor.map(totalizador).reduce(redutor, 0)
+            valor: (separado.producao.map(totalizador).reduce(redutor, 0) + separado.comercial.map(totalizador).reduce(redutor, 0) + separado.artista.map(totalizador).reduce(redutor, 0) + separado.produtor.map(totalizador).reduce(redutor, 0)).toFixed(2)
         }
 
     });
