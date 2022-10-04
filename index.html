@@ -160,16 +160,18 @@
 
             <div class="col-md-6 col-12">
                 <label for="nome_show">Nome do Evento</label>
-                <input class="form-control mask title" type="text" value="Cachê do Show"
-                name="nome_show" id="nome_show" />
-    
-    
-                <input type="button" onclick="htmlToCSV()" value="Exportar Planilha"
-                    class="btn btn-success">
-    
+                <input class="form-control mask title" type="text" value="Cachê do Show" name="nome_show"
+                    id="nome_show" />
+
+
+                <input type="button" onclick="htmlToCSV()" value="Exportar Planilha" class="btn btn-success">
+
             </div>
         </div>
-
+<br>
+<br>
+<br>
+<br>
         <style>
             label {
                 margin-top: 1%;
@@ -244,7 +246,7 @@
 
         function downloadCSVFile(csv, filename) {
             var csv_file, download_link;
-
+            csv = "sep=,\n" + (csv||"");
             csv_file = new Blob([csv], { type: "text/csv" });
 
             download_link = document.createElement("a");
