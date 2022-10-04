@@ -1,7 +1,7 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -15,20 +15,21 @@
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
- 
-  </head>
 
-  <body>
+</head>
+
+<body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">BeatFellas</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <a class="navbar-brand" href="#">BeatFellas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <!-- <li class="nav-item active">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
@@ -45,133 +46,133 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li> -->
-        </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
+            </ul>
+            <!-- <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form> -->
-      </div>
+        </div>
     </nav>
 
     <main role="main" class="container" style="margin-top:100px">
- 
-
-      <h1>Calculadora de Cachê</h1>
-   
-    <hr>
-    <form class="row">
-        <div class="col-sm-12 col-md-6">
-            <label for="porcentagemBeatfellas">Cachê Bruto</label>
-            <input class="form-control" type="number" name="cacheTotal" id="cacheTotal" />
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <label for="porcentagemBeatfellas">Porcentagem da BeatFellas</label>
-
-            <input class="form-control" type="number" min="1" max="100" value="10" name="porcentagemBeatfellas"
-                id="porcentagemBeatfellas" />
-        </div>
-        <div class="col-sm-12 col-md-6">
-
-            <label for="comercial">Comercial (Quem fechou o show)</label>
-            <select class="form-control" multiple name="comercial" id="comercial">
-                <option value="Caxa">Caxa</option>
-                <option value="Kaizonaro">Kaizonaro</option>
-                <option value="Mautari" selected>Mautari</option>
-            </select>
-            <br>
-            <br>
-            <label for="porcentagemComercial">Porcentagem do Comercial</label>
-
-            <input class="form-control" type="number" min="1" max="100" value="20" name="porcentagemComercial"
-                id="porcentagemComercial" />
-        </div>
-        <div class="col-sm-12 col-md-6">
-
-            <label for="produtores">Produtores (Quem resolve problemas e pendências diretamente com o
-                contratante)</label>
-            <select class="form-control" multiple name="produtores" id="produtores">
-                <option value="Caxa">Caxa</option>
-                <option value="Kaizonaro">Kaizonaro</option>
-                <option value="Mautari" selected>Mautari</option>
-            </select>
-            <br>
-            <br>
-            <label for="porcentagemProdutores">Porcentagem dos Produtores</label>
-
-            <input class="form-control" type="number" min="1" max="100" value="10" name="porcentagemProdutores"
-                id="porcentagemProdutores" />
-        </div>
-        <div class="col-sm-12 col-md-6">
-
-            <label for="producao"> Produção (Quem ajudou na parte técnica, filmagem, som, foto etc)</label>
-            <select class="form-control" multiple name="producao" id="producao">
-                <option value="Gustavo" selected>Gustavo</option>
-                <option value="Igor">Igor</option>
-                <option value="Tucca">Tucca</option>
-                <option value="Sara">Sara</option>
-                <option value="Sara Rios">Sara Rios</option>
-                <option value="Luis">Luis</option>
-
-            </select>
-            <br>
-            <br>
-            <label for="porcentagemProducao">Porcentagem da Produção</label>
-            <input class="form-control" type="number" min="1" max="100" value="10" name="porcentagemProducao"
-                id="porcentagemProducao" />
-        </div>
-
-        <div class="col-sm-12 col-md-6">
-
-            <label for="artista">Artista (Quem efetivamente tocou)</label>
-            <select class="form-control" multiple name="artista" id="artista">
-                <option value="Caxa" selected>Caxa</option>
-                <option value="Kaizonaro" selected>Kaizonaro</option>
-                <option value="Mautari" selected>Mautari</option>
-            </select>
-            <label for="porcentagemArtista">Porcentagem dos Artistas</label>
-            <input class="form-control" type="number" min="1" max="100" value="50" name="porcentagemArtista"
-                id="porcentagemArtista" />
 
 
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <br>
-            <br>
-            <input type="submit" value="Calcular Cachê" class="btn btn-success">
-            <br>
-            <br>
-        </div>
+        <h1>Calculadora de Cachê</h1>
+
         <hr>
-    </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Nome
-                </th>
-                <th>Valor a Receber (R$)</th>
-            </tr>
-        </thead>
-        <tbody id="result">
+        <form class="row validate">
+            <div class="col-sm-12 col-md-6">
+                <label for="porcentagemBeatfellas">Cachê Bruto</label>
+                <input class="form-control mask number obg" type="number" name="cacheTotal" id="cacheTotal" />
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="porcentagemBeatfellas">Porcentagem da BeatFellas</label>
 
-        </tbody>
-    </table>
-   
-    <style>
-        label {
-            margin-top: 1%;
-        }
-    </style>
+                <input class="form-control mask number obg" type="number" min="1" max="100" value="10"
+                    name="porcentagemBeatfellas" id="porcentagemBeatfellas" />
+            </div>
+            <div class="col-sm-12 col-md-6">
+
+                <label for="comercial">Comercial (Quem fechou o show)</label>
+                <select class="form-control obg" multiple name="comercial" id="comercial">
+                    <option value="Caxa">Caxa</option>
+                    <option value="Kaizonaro">Kaizonaro</option>
+                    <option value="Mautari" selected>Mautari</option>
+                </select>
+
+                <label for="porcentagemComercial">Porcentagem do Comercial</label>
+
+                <input class="form-control mask number obg" type="number" min="1" max="100" value="20"
+                    name="porcentagemComercial" id="porcentagemComercial" />
+            </div>
+            <div class="col-sm-12 col-md-6">
+
+                <label for="produtores">Produtores (Quem resolve problemas e pendências diretamente com o
+                    contratante)</label>
+                <select class="form-control obg" multiple name="produtores" id="produtores">
+                    <option value="Caxa">Caxa</option>
+                    <option value="Kaizonaro">Kaizonaro</option>
+                    <option value="Mautari" selected>Mautari</option>
+                </select>
+
+                <label for="porcentagemProdutores">Porcentagem dos Produtores</label>
+
+                <input class="form-control mask number obg" type="number" min="1" max="100" value="10"
+                    name="porcentagemProdutores" id="porcentagemProdutores" />
+            </div>
+            <div class="col-sm-12 col-md-6">
+
+                <label for="producao"> Produção (Quem ajudou na parte técnica, filmagem, som, foto etc)</label>
+                <select class="form-control obg" multiple name="producao" id="producao">
+                    <option value="Gustavo" selected>Gustavo</option>
+                    <option value="Igor">Igor</option>
+                    <option value="Tucca">Tucca</option>
+                    <option value="Sara">Sara</option>
+                    <option value="Sara Rios">Sara Rios</option>
+                    <option value="Luis">Luis</option>
+
+                </select>
+
+                <label for="porcentagemProducao">Porcentagem da Produção</label>
+                <input class="form-control mask number obg" type="number" min="1" max="100" value="10"
+                    name="porcentagemProducao" id="porcentagemProducao" />
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+
+                <label for="artista">Artista (Quem efetivamente tocou)</label>
+                <select class="form-control obg" multiple name="artista" id="artista">
+                    <option value="Caxa" selected>Caxa</option>
+                    <option value="Kaizonaro" selected>Kaizonaro</option>
+                    <option value="Mautari" selected>Mautari</option>
+                </select>
+                <label for="porcentagemArtista">Porcentagem dos Artistas</label>
+                <input class="form-control mask number obg" type="number" min="1" max="100" value="50" name="porcentagemArtista"
+                    id="porcentagemArtista" />
+
+
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <br>
+                <br>
+                <input type="submit" value="Calcular Cachê" class="btn btn-success">
+                <br>
+                <br>
+            </div>
+            <hr>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>Valor a Receber (R$)</th>
+                </tr>
+            </thead>
+            <tbody id="result">
+
+            </tbody>
+        </table>
+
+        <style>
+            label {
+                margin-top: 1%;
+            }
+        </style>
     </main><!-- /.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/innercodetech/innerformvalidation@master/InnerFormValidation.js"></script>
     <script src="cacheCalc.js"></script>
     <script>
 
@@ -224,4 +225,5 @@
     </script>
 
 </body>
+
 </html>
