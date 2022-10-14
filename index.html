@@ -190,6 +190,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.8/pwacompat.min.js"
+    integrity="sha384-uONtBTCBzHKF84F6XvyC8S0gL8HTkAPeCyBNvfLfsqHh+Kd6s/kaS4BdmNQ5ktp1"
+    crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
@@ -197,89 +200,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/innercodetech/innerformvalidation@master/InnerFormValidation.js"></script>
     <script src="cacheCalc.js"></script>
-    <script>
-
-        $(document).ready(function () {
-
-        });
-
-        $("select").select2({
-            tags: true
-        });
-
-        $("form").submit(function (e) {
-
-            e.preventDefault();
-
-            let prods = $("#producao").val();
-            let arts = $("#artista").val();
-            let com = $("#comercial").val();
-            let pd = $("#produtores").val();
-            let cache = parseFloat($("#cacheTotal").val());
-            let beatfellas = parseFloat($("#porcentagemBeatfellas").val());
-            let por_art = parseFloat($("#porcentagemArtista").val());
-            let por_prod = parseFloat($("#porcentagemProducao").val());
-            let por_com = parseFloat($("#porcentagemComercial").val());
-            let por_pd = parseFloat($("#porcentagemProdutores").val());
-
-            $("#result").html("");
-            let sum_por = (beatfellas + por_art + por_prod + por_com + por_pd)
-            if (sum_por == 100) {
-
-                var tt = calcularCache(cache, prods, com, arts, pd, beatfellas, por_prod, por_com, por_art, por_pd);
-
-                console.log("Calculado", tt);
-
-
-                tt.totais.forEach(element => {
-                    $("#result").append("<tr><td>" + element.nome + "</td><td>R$ " + element.valor + "</td></tr>");
-                });
-            } else {
-                console.warn("Porcentagens mau distribuidas", sum_por)
-            }
-
-        });
-
-        $(":input").on('change', function () {
-            $('form').submit();
-        });
-
-        function downloadCSVFile(csv, filename) {
-            var csv_file, download_link;
-            csv = "sep=,\n" + (csv||"");
-            csv_file = new Blob([csv], { type: "text/csv" });
-
-            download_link = document.createElement("a");
-
-            download_link.download = filename;
-
-            download_link.href = window.URL.createObjectURL(csv_file);
-
-            download_link.style.display = "none";
-
-            document.body.appendChild(download_link);
-
-            download_link.click();
-        }
-
-        function htmlToCSV(filename) {
-            filename = filename || $("#nome_show").val() || 'Cachê do Show'
-            var data = [];
-            var rows = document.querySelectorAll("table tr");
-
-            for (var i = 0; i < rows.length; i++) {
-                var row = [], cols = rows[i].querySelectorAll("td, th");
-
-                for (var j = 0; j < cols.length; j++) {
-                    row.push(cols[j].innerText);
-                }
-
-                data.push(row.join(","));
-            }
-
-            downloadCSVFile(data.join("\n"), filename);
-        }
-    </script>
+  
 
 </body>
 
