@@ -69,7 +69,14 @@ $(document).ready(function () {
 });
 
 $("select").select2({
-    tags: true
+    tags: true,
+    width: '100%',
+    placeholder: 'Selecione ou adicione...',
+    language: {
+        noResults: function () { return 'Nenhum resultado'; },
+        searching: function () { return 'Buscando...'; },
+        inputTooShort: function () { return 'Continue digitando...'; }
+    }
 });
 
 $("form").submit(function (e) {
@@ -90,17 +97,39 @@ $("form").submit(function (e) {
     $("#result").html("");
     let sum_por = (beatfellas + por_art + por_prod + por_com + por_pd)
     if (sum_por == 100) {
+        $('#percent-alert').hide();
 
         var tt = calcularCache(cache, prods, com, arts, pd, beatfellas, por_prod, por_com, por_art, por_pd);
 
         console.log("Calculado", tt);
 
+        /* Paleta de cores para os avatares */
+        var palette = ['#0090e7', '#00d25b', '#ffab00', '#fc424a', '#9a55ff', '#da8cff', '#0dcaf0'];
 
-        tt.totais.forEach(element => {
-            $("#result").append("<tr><td>" + element.nome + "</td><td>R$ " + element.valor + "</td></tr>");
+        tt.totais.forEach(function (element) {
+            var initials = element.nome
+                .split(' ')
+                .map(function (p) { return p[0] || ''; })
+                .slice(0, 2)
+                .join('')
+                .toUpperCase();
+            var color = palette[element.nome.charCodeAt(0) % palette.length];
+
+            $("#result").append(
+                '<tr>' +
+                '<td><div class="table-name-badge">' +
+                '<span class="avatar-circle" style="background:' + color + ';">' + initials + '</span>' +
+                element.nome +
+                '</div></td>' +
+                '<td class="value-cell">R$ ' + element.valor + '</td>' +
+                '</tr>'
+            );
         });
+
     } else {
-        console.warn("Porcentagens mau distribuidas", sum_por)
+        $('#percent-sum').text(sum_por.toFixed(1));
+        $('#percent-alert').show();
+        console.warn('Porcentagens mal distribuídas', sum_por);
     }
 
 });

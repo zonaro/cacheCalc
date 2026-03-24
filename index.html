@@ -1,206 +1,997 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Calculadora de cache da BeatFellas com instalacao como app.">
+    <meta name="author" content="BeatFellas">
+    <meta name="theme-color" content="#191c24">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Calculadora de Cache">
     <link rel="icon" href="icon-192x192.png">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
     <link rel="manifest" href="manifest.webmanifest">
-    <title>Calculadora de Cahcê - BeatFellas</title>
+    <title>Calculadora de Cachê - BeatFellas</title>
 
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/"> -->
+    <!-- Google Fonts: Ubuntu (fonte do Corona Admin) -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Material Design Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+    <style>
+        /* ==============================================
+           Corona Dark Admin — Tokens e Base
+           ============================================== */
+        :root {
+            --corona-bg-body: #191c24;
+            --corona-bg-sidebar: #2a2e3e;
+            --corona-bg-card: #2a2e3e;
+            --corona-bg-navbar: #2a2e3e;
+            --corona-bg-input: #2e3344;
+            --corona-accent-primary: #0090e7;
+            --corona-accent-success: #00d25b;
+            --corona-accent-warning: #ffab00;
+            --corona-accent-danger: #fc424a;
+            --corona-accent-info: #0dcaf0;
+            --corona-text-primary: #ffffff;
+            --corona-text-muted: #6c7293;
+            --corona-text-label: #a9a9b0;
+            --corona-border: rgba(151, 151, 151, 0.18);
+            --corona-sidebar-w: 260px;
+            --corona-navbar-h: 70px;
+        }
+
+        /* ==============================================
+           Body e Reset
+           ============================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: var(--corona-bg-body);
+            color: var(--corona-text-primary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .container-scroller {
+            overflow: hidden;
+        }
+
+        /* ==============================================
+           Sidebar
+           ============================================== */
+        .sidebar {
+            width: var(--corona-sidebar-w);
+            background: var(--corona-bg-sidebar);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1040;
+            transition: transform 0.25s ease;
+            border-right: 1px solid var(--corona-border);
+        }
+
+        .sidebar-brand-wrapper {
+            height: var(--corona-navbar-h);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid var(--corona-border);
+        }
+
+        .sidebar-brand {
+            color: var(--corona-text-primary);
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .sidebar-brand .brand-icon {
+            background: var(--corona-accent-primary);
+            color: #fff;
+            border-radius: 6px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar ul.nav {
+            padding: 1rem 0;
+            flex-direction: column;
+            list-style: none;
+            margin: 0;
+        }
+
+        .sidebar .nav-category {
+            padding: 0.6rem 1.5rem 0.3rem;
+            color: rgba(108, 114, 147, 0.7);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            font-weight: 600;
+            cursor: default;
+        }
+
+        .sidebar .nav-item {
+            width: 100%;
+        }
+
+        .sidebar .nav-link {
+            color: var(--corona-text-muted);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 4px;
+            margin: 2px 0.75rem;
+            transition: background 0.15s, color 0.15s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .sidebar .nav-link:hover {
+            color: var(--corona-text-primary);
+            background: rgba(0, 144, 231, 0.1);
+        }
+
+        .sidebar .nav-link.active {
+            color: var(--corona-accent-primary);
+            background: rgba(0, 144, 231, 0.15);
+        }
+
+        .sidebar .nav-link i {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* ==============================================
+           Topbar / Navbar
+           ============================================== */
+        .navbar.top-navbar {
+            background: var(--corona-bg-navbar);
+            height: var(--corona-navbar-h);
+            padding: 0 1.5rem;
+            border-bottom: 1px solid var(--corona-border);
+            margin-left: var(--corona-sidebar-w);
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-page-title {
+            color: var(--corona-text-muted);
+            font-size: 0.8125rem;
+            margin-left: auto;
+        }
+
+        .sidebar-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--corona-text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0.45rem;
+            border-radius: 4px;
+            line-height: 1;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        .sidebar-toggle-btn:hover {
+            color: var(--corona-text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ==============================================
+           Page Body Wrapper
+           ============================================== */
+        .page-body-wrapper {
+            margin-left: var(--corona-sidebar-w);
+            padding-top: var(--corona-navbar-h);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 2rem 1.75rem;
+        }
+
+        /* ==============================================
+           Page Header / Breadcrumb
+           ============================================== */
+        .page-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .page-header h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            font-size: 0.78rem;
+        }
+
+        .breadcrumb-item,
+        .breadcrumb-item a {
+            color: var(--corona-text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--corona-accent-primary);
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            color: var(--corona-text-muted);
+        }
+
+        /* ==============================================
+           Cards
+           ============================================== */
+        .card {
+            background-color: var(--corona-bg-card);
+            border: 1px solid var(--corona-border);
+            border-radius: 4px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--corona-text-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Banner gradiente Corona */
+        .corona-gradient-card {
+            background: linear-gradient(135deg, #da8cff 0%, #9a55ff 100%);
+            border: none;
+        }
+
+        .corona-gradient-card h4,
+        .corona-gradient-card p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .corona-gradient-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .corona-gradient-card p {
+            font-size: 0.84rem;
+            margin: 0;
+        }
+
+        /* ==============================================
+           Alerta de porcentagem
+           ============================================== */
+        #percent-alert {
+            display: none;
+            background: rgba(255, 171, 0, 0.12);
+            border: 1px solid rgba(255, 171, 0, 0.3);
+            color: var(--corona-accent-warning);
+            border-radius: 4px;
+            padding: 0.7rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* ==============================================
+           Form Labels e Inputs
+           ============================================== */
+        .form-label {
+            color: var(--corona-text-label);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            margin-top: 0.65rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .form-control {
+            background-color: var(--corona-bg-input);
+            border: 1px solid var(--corona-border);
+            color: var(--corona-text-primary);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            padding: 0.6rem 0.85rem;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .form-control:focus {
+            background-color: var(--corona-bg-input);
+            border-color: var(--corona-accent-primary);
+            color: var(--corona-text-primary);
+            box-shadow: 0 0 0 3px rgba(0, 144, 231, 0.2);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: var(--corona-text-muted);
+            opacity: 0.75;
+        }
+
+        .form-control.error {
+            border-color: var(--corona-accent-danger) !important;
+        }
+
+        .form-control.success {
+            border-color: var(--corona-accent-success) !important;
+        }
+
+        /* ==============================================
+           Botões
+           ============================================== */
+        .btn {
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: var(--corona-accent-primary);
+            border-color: var(--corona-accent-primary);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #0077c4;
+            border-color: #0077c4;
+            box-shadow: 0 0 0 3px rgba(0, 144, 231, 0.25);
+        }
+
+        .btn-success {
+            background-color: var(--corona-accent-success);
+            border-color: var(--corona-accent-success);
+            color: #fff;
+        }
+
+        .btn-success:hover,
+        .btn-success:focus {
+            background-color: #00af4d;
+            border-color: #00af4d;
+            box-shadow: 0 0 0 3px rgba(0, 210, 91, 0.25);
+            color: #fff;
+        }
+
+        /* ==============================================
+           Tabela de resultados
+           ============================================== */
+        .table {
+            color: var(--corona-text-primary);
+            border-color: var(--corona-border);
+        }
+
+        .table thead th {
+            background-color: var(--corona-bg-sidebar);
+            color: var(--corona-text-muted);
+            border-bottom: 2px solid var(--corona-border);
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            font-weight: 600;
+            padding: 0.85rem 1rem;
+        }
+
+        .table tbody td {
+            border-color: var(--corona-border);
+            vertical-align: middle;
+            padding: 0.75rem 1rem;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.018);
+        }
+
+        .table-name-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .avatar-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .value-cell {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--corona-accent-success);
+        }
+
+        hr {
+            border-color: var(--corona-border);
+            opacity: 1;
+        }
+
+        /* ==============================================
+           Footer
+           ============================================== */
+        .footer {
+            background-color: var(--corona-bg-card);
+            border-top: 1px solid var(--corona-border);
+            padding: 1rem 1.75rem;
+            color: var(--corona-text-muted);
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        /* ==============================================
+           Select2 — Dark Corona Theme
+           ============================================== */
+
+        /* Largura total */
+        .select2-container {
+            width: 100% !important;
+        }
+
+        /* Selection box — single e multiple */
+        .select2-container--default .select2-selection--multiple,
+        .select2-container--default .select2-selection--single {
+            background-color: var(--corona-bg-input);
+            border: 1px solid var(--corona-border);
+            border-radius: 4px;
+            min-height: 42px;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        /* Focus / Open states */
+        .select2-container--default.select2-container--focus .select2-selection--multiple,
+        .select2-container--default.select2-container--focus .select2-selection--single,
+        .select2-container--default.select2-container--open .select2-selection--multiple,
+        .select2-container--default.select2-container--open .select2-selection--single {
+            border-color: var(--corona-accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 144, 231, 0.2);
+            outline: none;
+        }
+
+        /* Texto renderizado (single) */
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: var(--corona-text-primary);
+            line-height: 42px;
+            padding-left: 0.75rem;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: var(--corona-text-muted);
+        }
+
+        /* Seta (single) */
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 42px;
+            right: 8px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-color: var(--corona-text-muted) transparent transparent transparent;
+        }
+
+        .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+            border-color: transparent transparent var(--corona-accent-primary) transparent;
+        }
+
+        /* Container multiple */
+        .select2-container--default .select2-selection--multiple {
+            padding: 4px 6px;
+            cursor: text;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 0;
+        }
+
+        /* Chips de seleção */
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: rgba(0, 144, 231, 0.15);
+            border: 1px solid rgba(0, 144, 231, 0.35);
+            border-radius: 3px;
+            color: #6bbfff;
+            font-size: 0.775rem;
+            padding: 2px 6px 2px 4px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+            color: #6bbfff;
+        }
+
+        /* Botão remover chip */
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: rgba(107, 191, 255, 0.7);
+            background: none;
+            border: none;
+            font-size: 0.85rem;
+            line-height: 1;
+            padding: 0;
+            cursor: pointer;
+            order: -1;
+            transition: color 0.15s;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+            color: var(--corona-accent-danger);
+            background: none;
+        }
+
+        /* Input inline (multiple) */
+        .select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field {
+            color: var(--corona-text-primary);
+            background: transparent;
+            border: none;
+            outline: none;
+            min-width: 90px;
+            margin-top: 2px;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field::placeholder {
+            color: var(--corona-text-muted);
+        }
+
+        /* Dropdown panel */
+        .select2-dropdown {
+            background-color: var(--corona-bg-card);
+            border: 1px solid var(--corona-accent-primary);
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        /* Campo de busca no dropdown */
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            background-color: var(--corona-bg-input);
+            border: 1px solid var(--corona-border);
+            border-radius: 4px;
+            color: var(--corona-text-primary);
+            padding: 0.45rem 0.75rem;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field:focus {
+            border-color: var(--corona-accent-primary);
+        }
+
+        /* Lista de resultados */
+        .select2-results__options {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .select2-container--default .select2-results__option {
+            color: var(--corona-text-label);
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            transition: background 0.1s;
+            cursor: pointer;
+        }
+
+        /* Hover highlight */
+        .select2-container--default .select2-results__option--highlighted[aria-selected],
+        .select2-container--default .select2-results__option--highlighted[data-selected] {
+            background-color: var(--corona-accent-primary);
+            color: #fff;
+        }
+
+        /* Item já selecionado */
+        .select2-container--default .select2-results__option[aria-selected=true],
+        .select2-container--default .select2-results__option[data-selected=true] {
+            background-color: rgba(0, 144, 231, 0.15);
+            color: #6bbfff;
+        }
+
+        /* Scrollbar customizada (webkit) */
+        .select2-results__options::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .select2-results__options::-webkit-scrollbar-track {
+            background: var(--corona-bg-card);
+        }
+
+        .select2-results__options::-webkit-scrollbar-thumb {
+            background: rgba(108, 114, 147, 0.4);
+            border-radius: 3px;
+        }
+
+        /* ==============================================
+           Responsividade: Mobile
+           ============================================== */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.sidebar-open {
+                transform: translateX(0);
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.55);
+                z-index: 1039;
+                cursor: pointer;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .navbar.top-navbar {
+                margin-left: 0;
+            }
+
+            .page-body-wrapper {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">BeatFellas</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="container-scroller">
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+        <!-- =========================================
+             SIDEBAR
+             ========================================= -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-brand-wrapper">
+                <a class="sidebar-brand" href="#">
+                    <span class="brand-icon"><i class="mdi mdi-music"></i></span>
+                    BeatFellas
+                </a>
             </div>
-          </li> -->
+            <ul class="nav">
+                <li class="nav-category">Principal</li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="mdi mdi-calculator"></i>
+                        <span>Calculadora de Cachê</span>
+                    </a>
+                </li>
             </ul>
-            <!-- <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-        </div>
-    </nav>
+        </nav>
 
-    <main role="main" class="container" style="margin-top:100px">
+        <!-- Overlay mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+        <!-- =========================================
+             PAGE BODY WRAPPER
+             ========================================= -->
+        <div class="page-body-wrapper">
 
-        <h1>Calculadora de Cachê</h1>
+            <!-- TOPBAR -->
+            <nav class="navbar top-navbar" id="topNavbar">
+                <button class="sidebar-toggle-btn" id="sidebarToggle" aria-label="Alternar menu">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <span class="ms-3 fw-semibold d-lg-none" style="color:var(--corona-text-primary)">BeatFellas</span>
+                <span class="navbar-page-title d-none d-md-block">
+                    <i class="mdi mdi-music-note me-1"></i>Calculadora de Cachê
+                </span>
+            </nav>
 
-        <hr>
-        <form class="row validate">
-            <div class="col-sm-12 col-md-6">
-                <label for="porcentagemBeatfellas">Cachê Bruto</label>
-                <input class="form-control mask number obg" type="number" name="cacheTotal" id="cacheTotal" />
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <label for="porcentagemBeatfellas">Porcentagem da BeatFellas</label>
+            <!-- MAIN -->
+            <div class="main-panel">
+                <div class="content-wrapper">
 
-                <input class="form-control mask number obg" type="number" min="1" max="100" value="10"
-                    name="porcentagemBeatfellas" id="porcentagemBeatfellas" />
-            </div>
-            <div class="col-sm-12 col-md-6">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div>
+                            <h4 class="mb-1">Calculadora de Cachê</h4>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">BeatFellas</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Cachê</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
 
-                <label for="comercial">Comercial (Quem fechou o show)</label>
-                <select class="form-control obg" multiple name="comercial" id="comercial">
-                    <option value="Caxa">Caxa</option>
-                    <option value="Kaizonaro">Kaizonaro</option>
-                    <option value="Mautari" selected>Mautari</option>
-                </select>
+                    <!-- Banner gradiente Corona -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card corona-gradient-card">
+                                <div class="card-body py-3 d-flex align-items-center gap-3">
+                                    <i class="mdi mdi-cash-multiple"
+                                        style="font-size:2.4rem;color:rgba(255,255,255,0.9);flex-shrink:0;"></i>
+                                    <div>
+                                        <h4 class="mb-0">Distribua o cachê com justiça</h4>
+                                        <p class="mb-0">Informe o valor bruto e as porcentagens de cada área para
+                                            calcular a distribuição automaticamente.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <label for="porcentagemComercial">Porcentagem do Comercial</label>
+                    <!-- ===== FORMULÁRIO ===== -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="mdi mdi-form-textbox me-2"
+                                            style="color:var(--corona-accent-primary)"></i>
+                                        Dados do Show
+                                    </h6>
 
-                <input class="form-control mask number obg" type="number" min="1" max="100" value="20"
-                    name="porcentagemComercial" id="porcentagemComercial" />
-            </div>
-            <div class="col-sm-12 col-md-6">
+                                    <!-- Alerta de porcentagem -->
+                                    <div id="percent-alert" role="alert">
+                                        <i class="mdi mdi-alert-outline me-2"></i>
+                                        As porcentagens não somam 100%. Soma atual: <strong id="percent-sum">0</strong>%
+                                    </div>
 
-                <label for="produtores">Produtores (Quem resolve problemas e pendências diretamente com o
-                    contratante)</label>
-                <select class="form-control obg" multiple name="produtores" id="produtores">
-                    <option value="Caxa">Caxa</option>
-                    <option value="Kaizonaro">Kaizonaro</option>
-                    <option value="Mautari" selected>Mautari</option>
-                </select>
+                                    <form class="row g-3 validate" id="cacheForm">
 
-                <label for="porcentagemProdutores">Porcentagem dos Produtores</label>
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="cacheTotal">
+                                                <i class="mdi mdi-currency-brl me-1"></i>Cachê Bruto (R$)
+                                            </label>
+                                            <input class="form-control mask number obg" type="number" min="0"
+                                                step="0.01" placeholder="0,00" name="cacheTotal" id="cacheTotal" />
+                                        </div>
 
-                <input class="form-control mask number obg" type="number" min="1" max="100" value="10"
-                    name="porcentagemProdutores" id="porcentagemProdutores" />
-            </div>
-            <div class="col-sm-12 col-md-6">
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="porcentagemBeatfellas">
+                                                <i class="mdi mdi-percent me-1"></i>Porcentagem da BeatFellas (%)
+                                            </label>
+                                            <input class="form-control mask number obg" type="number" min="1" max="100"
+                                                value="10" name="porcentagemBeatfellas" id="porcentagemBeatfellas" />
+                                        </div>
 
-                <label for="producao"> Produção (Quem ajudou na parte técnica, filmagem, som, foto etc)</label>
-                <select class="form-control obg" multiple name="producao" id="producao">
-                    <option value="Gustavo" selected>Gustavo</option>
-                    <option value="Igor">Igor</option>
-                    <option value="Tucca">Tucca</option>
-                    <option value="Sara">Sara</option>
-                    <option value="Sara Rios">Sara Rios</option>
-                    <option value="Luis">Luis</option>
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="comercial">
+                                                <i class="mdi mdi-handshake me-1"></i>Comercial (Quem fechou o show)
+                                            </label>
+                                            <select class="obg" multiple name="comercial" id="comercial">
+                                                <option value="Caxa">Caxa</option>
+                                                <option value="Kaizonaro">Kaizonaro</option>
+                                                <option value="Mautari" selected>Mautari</option>
+                                            </select>
+                                            <label class="form-label" for="porcentagemComercial">
+                                                <i class="mdi mdi-percent me-1"></i>Porcentagem do Comercial (%)
+                                            </label>
+                                            <input class="form-control mask number obg" type="number" min="1" max="100"
+                                                value="20" name="porcentagemComercial" id="porcentagemComercial" />
+                                        </div>
 
-                </select>
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="produtores">
+                                                <i class="mdi mdi-account-tie me-1"></i>Produtores (Quem resolve
+                                                pendências com o contratante)
+                                            </label>
+                                            <select class="obg" multiple name="produtores" id="produtores">
+                                                <option value="Caxa">Caxa</option>
+                                                <option value="Kaizonaro">Kaizonaro</option>
+                                                <option value="Mautari" selected>Mautari</option>
+                                            </select>
+                                            <label class="form-label" for="porcentagemProdutores">
+                                                <i class="mdi mdi-percent me-1"></i>Porcentagem dos Produtores (%)
+                                            </label>
+                                            <input class="form-control mask number obg" type="number" min="1" max="100"
+                                                value="10" name="porcentagemProdutores" id="porcentagemProdutores" />
+                                        </div>
 
-                <label for="porcentagemProducao">Porcentagem da Produção</label>
-                <input class="form-control mask number obg" type="number" min="1" max="100" value="10"
-                    name="porcentagemProducao" id="porcentagemProducao" />
-            </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="producao">
+                                                <i class="mdi mdi-camera me-1"></i>Produção (Técnico, filmagem, som,
+                                                foto etc.)
+                                            </label>
+                                            <select class="obg" multiple name="producao" id="producao">
+                                                <option value="Gustavo" selected>Gustavo</option>
+                                                <option value="Igor">Igor</option>
+                                                <option value="Tucca">Tucca</option>
+                                                <option value="Sara">Sara</option>
+                                                <option value="Sara Rios">Sara Rios</option>
+                                                <option value="Luis">Luis</option>
+                                            </select>
+                                            <label class="form-label" for="porcentagemProducao">
+                                                <i class="mdi mdi-percent me-1"></i>Porcentagem da Produção (%)
+                                            </label>
+                                            <input class="form-control mask number obg" type="number" min="1" max="100"
+                                                value="10" name="porcentagemProducao" id="porcentagemProducao" />
+                                        </div>
 
-            <div class="col-sm-12 col-md-6">
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="artista">
+                                                <i class="mdi mdi-microphone me-1"></i>Artistas (Quem efetivamente
+                                                tocou)
+                                            </label>
+                                            <select class="obg" multiple name="artista" id="artista">
+                                                <option value="Caxa" selected>Caxa</option>
+                                                <option value="Kaizonaro" selected>Kaizonaro</option>
+                                                <option value="Mautari" selected>Mautari</option>
+                                            </select>
+                                            <label class="form-label" for="porcentagemArtista">
+                                                <i class="mdi mdi-percent me-1"></i>Porcentagem dos Artistas (%)
+                                            </label>
+                                            <input class="form-control mask number obg" type="number" min="1" max="100"
+                                                value="50" name="porcentagemArtista" id="porcentagemArtista" />
+                                        </div>
 
-                <label for="artista">Artista (Quem efetivamente tocou)</label>
-                <select class="form-control obg" multiple name="artista" id="artista">
-                    <option value="Caxa" selected>Caxa</option>
-                    <option value="Kaizonaro" selected>Kaizonaro</option>
-                    <option value="Mautari" selected>Mautari</option>
-                </select>
-                <label for="porcentagemArtista">Porcentagem dos Artistas</label>
-                <input class="form-control mask number obg" type="number" min="1" max="100" value="50"
-                    name="porcentagemArtista" id="porcentagemArtista" />
+                                        <div class="col-12 d-flex gap-2 mt-2">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="mdi mdi-calculator me-1"></i>Calcular Cachê
+                                            </button>
+                                        </div>
 
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <br>
-                <br>
-                <input type="submit" value="Calcular Cachê" class="btn btn-success">
+                    <!-- ===== RESULTADO ===== -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="mdi mdi-table-large me-2"
+                                            style="color:var(--corona-accent-success)"></i>
+                                        Resultado da Distribuição
+                                    </h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Valor a Receber</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="result"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <br>
-                <br>
-            </div>
+                    <!-- ===== EXPORTAR ===== -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="mdi mdi-download me-2" style="color:var(--corona-accent-warning)"></i>
+                                        Exportar Planilha
+                                    </h6>
+                                    <div class="row g-3 align-items-end">
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="form-label" for="nome_show">Nome do Evento</label>
+                                            <input class="form-control mask title" type="text" value="Cachê do Show"
+                                                placeholder="Ex: Show do BeatFellas" name="nome_show" id="nome_show" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <button type="button" onclick="htmlToCSV()" class="btn btn-success">
+                                                <i class="mdi mdi-microsoft-excel me-1"></i>Exportar Planilha CSV
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <hr>
-        </form>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>Valor a Receber (R$)</th>
-                </tr>
-            </thead>
-            <tbody id="result">
+                </div><!-- /.content-wrapper -->
 
-            </tbody>
-        </table>
-        <div class="row">
+                <!-- FOOTER -->
+                <footer class="footer">
+                    BeatFellas &copy; 2026 &mdash; Calculadora de Cachê
+                </footer>
+            </div><!-- /.main-panel -->
+        </div><!-- /.page-body-wrapper -->
 
-            <div class="col-md-6 col-12">
-                <label for="nome_show">Nome do Evento</label>
-                <input class="form-control mask title" type="text" value="Cachê do Show" name="nome_show"
-                    id="nome_show" />
+    </div><!-- /.container-scroller -->
 
-
-                <input type="button" onclick="htmlToCSV()" value="Exportar Planilha" class="btn btn-success">
-
-            </div>
-        </div>
-<br>
-<br>
-<br>
-<br>
-        <style>
-            label {
-                margin-top: 1%;
-            }
-
-            .error {
-                border-color: red;
-            }
-
-            .success {
-                border-color: green;
-            }
-        </style>
-    </main><!-- /.container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- =========================================
+         SCRIPTS
+         ========================================= -->
     <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.8/pwacompat.min.js"
-    integrity="sha384-uONtBTCBzHKF84F6XvyC8S0gL8HTkAPeCyBNvfLfsqHh+Kd6s/kaS4BdmNQ5ktp1"
-    crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+        integrity="sha384-uONtBTCBzHKF84F6XvyC8S0gL8HTkAPeCyBNvfLfsqHh+Kd6s/kaS4BdmNQ5ktp1"
+        crossorigin="anonymous"></script>
+
+    <!-- jQuery full (necessário para Select2) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 5 JS Bundle (inclui Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- InnerFormValidation -->
     <script src="https://cdn.jsdelivr.net/gh/innercodetech/innerformvalidation@master/InnerFormValidation.js"></script>
+
+    <!-- App Logic -->
     <script src="cacheCalc.js"></script>
-  
+
+    <script>
+        /* ---- Sidebar Toggle ---- */
+        (function () {
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            var toggle = document.getElementById('sidebarToggle');
+            if (!toggle) return;
+
+            toggle.addEventListener('click', function () {
+                sidebar.classList.toggle('sidebar-open');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', function () {
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('active');
+            });
+        }());
+    </script>
 
 </body>
 
