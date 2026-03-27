@@ -218,6 +218,15 @@
             flex-direction: column;
         }
 
+        body.sidebar-collapsed .sidebar {
+            transform: translateX(-100%);
+        }
+
+        body.sidebar-collapsed .navbar.top-navbar,
+        body.sidebar-collapsed .page-body-wrapper {
+            margin-left: 0;
+        }
+
         .main-panel {
             flex: 1;
             display: flex;
@@ -454,6 +463,31 @@
             font-weight: 600;
             font-size: 0.9rem;
             color: var(--corona-accent-success);
+        }
+
+        .distribution-chart-wrap {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--corona-border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .distribution-chart-title {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            color: var(--corona-text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .distribution-chart-canvas {
+            width: 100%;
+            max-width: 360px;
+            height: 260px;
+            margin: 0 auto;
+            display: block;
         }
 
         hr {
@@ -752,7 +786,14 @@
                                 </ol>
                             </nav>
                         </div>
+                        <div class="btn-group" role="group" aria-label="Ações da calculadora">
+                            <button type="button" onclick="htmlToCSV()" class="btn btn-success">
+                                <i class="mdi mdi-microsoft-excel me-1"></i>Exportar Planilha CSV
+                            </button>
+                        </div>
                     </div>
+
+
 
                     <!-- Banner gradiente Corona -->
                     <div class="row mb-4">
@@ -788,6 +829,14 @@
                                         As porcentagens não somam 100%. Soma atual: <strong id="percent-sum">0</strong>%
                                     </div>
 
+                                    <div class="row g-3 align-items-end">
+                                        <div class="col-sm-12 col-md-12">
+                                            <label class="form-label" for="nome_show">Nome do Evento</label>
+                                            <input class="form-control mask title" type="text" value="Cachê do Show"
+                                                placeholder="Ex: Show do BeatFellas" name="nome_show" id="nome_show" />
+                                        </div>
+                                    </div>
+
                                     <form class="row g-3 validate" id="cacheForm">
 
                                         <div class="col-sm-12 col-md-6">
@@ -811,9 +860,6 @@
                                                 <i class="mdi mdi-handshake me-1"></i>Comercial (Quem fechou o show)
                                             </label>
                                             <select class="obg" multiple name="comercial" id="comercial">
-                                                <option value="Caxa">Caxa</option>
-                                                <option value="Kaizonaro">Kaizonaro</option>
-                                                <option value="Mautari" selected>Mautari</option>
                                             </select>
                                             <label class="form-label" for="porcentagemComercial">
                                                 <i class="mdi mdi-percent me-1"></i>Porcentagem do Comercial (%)
@@ -828,9 +874,6 @@
                                                 pendências com o contratante)
                                             </label>
                                             <select class="obg" multiple name="produtores" id="produtores">
-                                                <option value="Caxa">Caxa</option>
-                                                <option value="Kaizonaro">Kaizonaro</option>
-                                                <option value="Mautari" selected>Mautari</option>
                                             </select>
                                             <label class="form-label" for="porcentagemProdutores">
                                                 <i class="mdi mdi-percent me-1"></i>Porcentagem dos Produtores (%)
@@ -845,12 +888,6 @@
                                                 foto etc.)
                                             </label>
                                             <select class="obg" multiple name="producao" id="producao">
-                                                <option value="Gustavo" selected>Gustavo</option>
-                                                <option value="Igor">Igor</option>
-                                                <option value="Tucca">Tucca</option>
-                                                <option value="Sara">Sara</option>
-                                                <option value="Sara Rios">Sara Rios</option>
-                                                <option value="Luis">Luis</option>
                                             </select>
                                             <label class="form-label" for="porcentagemProducao">
                                                 <i class="mdi mdi-percent me-1"></i>Porcentagem da Produção (%)
@@ -865,9 +902,6 @@
                                                 tocou)
                                             </label>
                                             <select class="obg" multiple name="artista" id="artista">
-                                                <option value="Caxa" selected>Caxa</option>
-                                                <option value="Kaizonaro" selected>Kaizonaro</option>
-                                                <option value="Mautari" selected>Mautari</option>
                                             </select>
                                             <label class="form-label" for="porcentagemArtista">
                                                 <i class="mdi mdi-percent me-1"></i>Porcentagem dos Artistas (%)
@@ -875,79 +909,57 @@
                                             <input class="form-control mask number obg" type="number" min="1" max="100"
                                                 value="50" name="porcentagemArtista" id="porcentagemArtista" />
                                         </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-calculator me-1"></i>Calcular Cachê
+                                        </button>
+                                </div>
 
-                                        <div class="col-12 d-flex gap-2 mt-2">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="mdi mdi-calculator me-1"></i>Calcular Cachê
-                                            </button>
-                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                    </form>
+                <!-- ===== RESULTADO ===== -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="mdi mdi-table-large me-2" style="color:var(--corona-accent-success)"></i>
+                                    Resultado da Distribuição
+                                </h6>
+                                <div class="distribution-chart-wrap">
+                                    <div class="distribution-chart-title">Gráfico de Pizza da Distribuição</div>
+                                    <canvas id="distributionPieChart" class="distribution-chart-canvas"
+                                        height="260"></canvas>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Valor a Receber</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="result"></tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- ===== RESULTADO ===== -->
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <i class="mdi mdi-table-large me-2"
-                                            style="color:var(--corona-accent-success)"></i>
-                                        Resultado da Distribuição
-                                    </h6>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nome</th>
-                                                    <th>Valor a Receber</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="result"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- ===== EXPORTAR ===== -->
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <i class="mdi mdi-download me-2" style="color:var(--corona-accent-warning)"></i>
-                                        Exportar Planilha
-                                    </h6>
-                                    <div class="row g-3 align-items-end">
-                                        <div class="col-sm-12 col-md-6">
-                                            <label class="form-label" for="nome_show">Nome do Evento</label>
-                                            <input class="form-control mask title" type="text" value="Cachê do Show"
-                                                placeholder="Ex: Show do BeatFellas" name="nome_show" id="nome_show" />
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <button type="button" onclick="htmlToCSV()" class="btn btn-success">
-                                                <i class="mdi mdi-microsoft-excel me-1"></i>Exportar Planilha CSV
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div><!-- /.content-wrapper -->
+            </div><!-- /.content-wrapper -->
 
-                <!-- FOOTER -->
-                <footer class="footer">
-                    BeatFellas &copy; 2026 &mdash; Calculadora de Cachê
-                </footer>
-            </div><!-- /.main-panel -->
-        </div><!-- /.page-body-wrapper -->
+            <!-- FOOTER -->
+            <footer class="footer">
+                BeatFellas &copy; 2026 &mdash; Calculadora de Cachê
+            </footer>
+        </div><!-- /.main-panel -->
+    </div><!-- /.page-body-wrapper -->
 
     </div><!-- /.container-scroller -->
 
@@ -967,6 +979,9 @@
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
     <!-- InnerFormValidation -->
     <script src="https://cdn.jsdelivr.net/gh/innercodetech/innerformvalidation@master/InnerFormValidation.js"></script>
 
@@ -981,14 +996,30 @@
             var toggle = document.getElementById('sidebarToggle');
             if (!toggle) return;
 
+            function isMobileViewport() {
+                return window.matchMedia('(max-width: 991.98px)').matches;
+            }
+
             toggle.addEventListener('click', function () {
-                sidebar.classList.toggle('sidebar-open');
-                overlay.classList.toggle('active');
+                if (isMobileViewport()) {
+                    sidebar.classList.toggle('sidebar-open');
+                    overlay.classList.toggle('active');
+                    return;
+                }
+
+                document.body.classList.toggle('sidebar-collapsed');
             });
 
             overlay.addEventListener('click', function () {
                 sidebar.classList.remove('sidebar-open');
                 overlay.classList.remove('active');
+            });
+
+            window.addEventListener('resize', function () {
+                if (!isMobileViewport()) {
+                    sidebar.classList.remove('sidebar-open');
+                    overlay.classList.remove('active');
+                }
             });
         }());
     </script>
